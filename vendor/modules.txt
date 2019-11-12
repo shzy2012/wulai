@@ -1,0 +1,19 @@
+# github.com/abiosoft/ishell v2.0.0+incompatible
+github.com/abiosoft/ishell
+# github.com/abiosoft/readline v0.0.0-20180607040430-155bce2042db
+github.com/abiosoft/readline
+# github.com/fatih/color v1.7.0
+github.com/fatih/color
+# github.com/flynn-archive/go-shlex v0.0.0-20150515145356-3f9db97f8568
+github.com/flynn-archive/go-shlex
+# github.com/laiye-ai/wulai-openapi-sdk-golang v0.0.0-20191111114708-9f0fca413fe2
+github.com/laiye-ai/wulai-openapi-sdk-golang/services/common
+github.com/laiye-ai/wulai-openapi-sdk-golang/services/common/errors
+github.com/laiye-ai/wulai-openapi-sdk-golang/services/common/log
+github.com/laiye-ai/wulai-openapi-sdk-golang/services/wulai
+# github.com/mattn/go-colorable v0.1.4
+github.com/mattn/go-colorable
+# github.com/mattn/go-isatty v0.0.10
+github.com/mattn/go-isatty
+# golang.org/x/sys v0.0.0-20191008105621-543471e840be
+golang.org/x/sys/unix
