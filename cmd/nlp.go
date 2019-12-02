@@ -65,8 +65,8 @@ var NlpEntitiesExtract = &ishell.Cmd{
 var NlpTokenize = &ishell.Cmd{
 	Name:     "nlpTokenize",
 	Aliases:  []string{"nlptokenize", "nlp_tokenize", "nt"},
-	Help:     "实体抽取",
-	LongHelp: "实体抽取 nlpTokenize query  \n\n参数 query:分词&词性标注",
+	Help:     "分词&词性标注",
+	LongHelp: "分词&词性标注 nlpTokenize query  \n\n参数 query:分词&词性标注",
 	Func: func(c *ishell.Context) {
 		frontFunc(c, 1, func() {
 			c.Println("操作结果:", nlpTokenize(c.Args[0]))
