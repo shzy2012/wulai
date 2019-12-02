@@ -3,7 +3,6 @@ package wulai
 import (
 	"encoding/json"
 	"fmt"
-	"reflect"
 	"strings"
 
 	"github.com/laiye-ai/wulai-openapi-sdk-golang/services/common/errors"
@@ -235,7 +234,7 @@ func (x *Client) MsgReceive(userID string, msgBody interface{}, thirdMsgID, extr
 }
 
 //MsgSync 同步发给用户的消息
-func (x *Client) MsgSync(userID string, answerID int, msgTS, extra string, botBody, msgBody interface{}) (model *MsgSync, err error) {
+func (x *Client) MsgSync(userID string, answerID int, msgTS int64, extra string, botBody, msgBody interface{}) (model *MsgSync, err error) {
 
 	if strings.ToUpper(x.Version) == "V1" {
 
@@ -250,23 +249,21 @@ func (x *Client) MsgSync(userID string, answerID int, msgTS, extra string, botBo
 		return nil, errors.NewClientError(errors.UnsupportedTypeErrorCode, errorMsg, nil)
 	}
 
-	//检查Bot类型是否合法
-	botType, ok := CheckBotType(botBody)
-	if !ok {
-		errorMsg := fmt.Sprintf(errors.UnsupportedTypeErrorMessage, botType, "*"+botType)
-		return nil, errors.NewClientError(errors.UnsupportedTypeErrorCode, errorMsg, nil)
-	}
-
 	//msg bytes
 	msgBytes, err := json.Marshal(msgBody)
 	if err != nil {
 		return nil, errors.NewClientError(errors.JsonMarshalErrorCode, errors.JsonMarshalErrorMessage, err)
 	}
 
-	//bot bytes
-	botBytes, err := json.Marshal(botBody)
-	if err != nil {
-		return nil, errors.NewClientError(errors.JsonMarshalErrorCode, errors.JsonMarshalErrorMessage, err)
+	//检查Bot类型是否合法
+	botBytes := make([]byte, 0)
+	botType, ok := CheckBotType(botBody)
+	if ok {
+		//传递bot
+		botBytes, err = json.Marshal(botBody)
+		if err != nil {
+			return nil, errors.NewClientError(errors.JsonMarshalErrorCode, errors.JsonMarshalErrorMessage, err)
+		}
 	}
 
 	bytes, err := x.msgSyncV2(userID, answerID, msgTS, extra, botType, botBytes, msgType, msgBytes)
@@ -307,7 +304,7 @@ func CheckMsgType(msgType interface{}) (string, bool) {
 	case *ShareLink:
 		return "share_link", true
 	}
-	return reflect.TypeOf(msgType).String(), false
+	return "", false
 }
 
 //CheckBotType 检查Bot类型
@@ -323,5 +320,5 @@ func CheckBotType(botType interface{}) (string, bool) {
 	case *Keyword:
 		return "keyword", true
 	}
-	return reflect.TypeOf(botType).String(), false
+	return "", false
 }

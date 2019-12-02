@@ -20,9 +20,9 @@ func msgBotResponse(userID, content string) string {
 	botResp, err := WulaiClient.MsgBotResponse(userID, textMsg, "")
 	if err != nil {
 		if cliErr, ok := err.(*errors.ClientError); ok {
-			return cliErr.Error()
+			return cliErr.Message()
 		} else if serErr, ok := err.(*errors.ServerError); ok {
-			return serErr.Error()
+			return serErr.Message()
 		} else {
 			return err.Error()
 		}
@@ -43,9 +43,9 @@ func msgBotResponseTask(userID, content string) string {
 	botResp, err := WulaiClient.MsgBotResponseTask(userID, textMsg, "")
 	if err != nil {
 		if cliErr, ok := err.(*errors.ClientError); ok {
-			return cliErr.Error()
+			return cliErr.Message()
 		} else if serErr, ok := err.(*errors.ServerError); ok {
-			return serErr.Error()
+			return serErr.Message()
 		} else {
 			return err.Error()
 		}

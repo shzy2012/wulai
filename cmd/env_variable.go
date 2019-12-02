@@ -2,6 +2,7 @@ package cmd
 
 import (
 	"fmt"
+	"os"
 
 	"github.com/abiosoft/ishell"
 	"github.com/fatih/color"
@@ -10,6 +11,7 @@ import (
 
 const (
 	notInitClient = "未初始化吾来客户端，请使用init初始化"
+	initClientFromEnv = "已通过环境变量，完成初始化"
 	missedParam   = "缺少参数"
 )
 
@@ -23,6 +25,12 @@ var yellow func(a ...interface{}) string
 
 func init() {
 	yellow = color.New(color.FgYellow).SprintFunc()
+	pubkey, _ = os.LookupEnv("pubkey")
+	secret, _ = os.LookupEnv("secret")
+	if pubkey != "" && secret != "" {
+		initClient(secret, pubkey)
+		fmt.Println(yellow(initClientFromEnv))
+	}
 }
 
 func initClient(secret, pubkey string) {

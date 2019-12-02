@@ -26,9 +26,9 @@ func userAttributeCreate(userID, attrID, attrValue string) string {
 	err := WulaiClient.UserAttributeCreate(userID, attrID, attrValue)
 	if err != nil {
 		if cliErr, ok := err.(*errors.ClientError); ok {
-			return cliErr.Error()
+			return cliErr.Message()
 		} else if serErr, ok := err.(*errors.ServerError); ok {
-			return serErr.Error()
+			return serErr.Message()
 		} else {
 			return err.Error()
 		}
@@ -43,9 +43,9 @@ func userAttributeList(isAttrGroup bool, page, pageSize int) string {
 	resp, err := WulaiClient.UserAttributeList(isAttrGroup, page, pageSize)
 	if err != nil {
 		if cliErr, ok := err.(*errors.ClientError); ok {
-			return cliErr.Error()
+			return cliErr.Message()
 		} else if serErr, ok := err.(*errors.ServerError); ok {
-			return serErr.Error()
+			return serErr.Message()
 		} else {
 			return err.Error()
 		}

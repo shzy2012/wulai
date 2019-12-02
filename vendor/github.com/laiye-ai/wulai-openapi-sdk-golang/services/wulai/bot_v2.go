@@ -2,6 +2,7 @@ package wulai
 
 import (
 	"fmt"
+	"strings"
 )
 
 //msgBotResponseV2 获取机器人回复(V2)
@@ -105,16 +106,20 @@ func (x *Client) msgReceiveV2(userID, thirdMsgID, extra, msgType string, msgBody
 }
 
 //msgSyncV2 同步发给用户的消息(V2)
-func (x *Client) msgSyncV2(userID string, answerID int, msgTS, extra, botType string, botBody []byte, msgType string, msgBody []byte) ([]byte, error) {
+func (x *Client) msgSyncV2(userID string, answerID int, msgTS int64, extra, botType string, botBody []byte, msgType string, msgBody []byte) ([]byte, error) {
 	url := fmt.Sprintf("%s/%s/msg/sync", x.Endpoint, x.Version)
 	input := fmt.Sprintf(`{
 		"user_id": "%s",
-		"extra": "%s",
-		"bot": {"%s": %s},
-		"msg_ts": "%s",
+		"extra": %q,
+		"bot": {},
+		"msg_ts": %v,
 		"msg_body": {"%s": %s},
 		"answer_id": %v
-	  }`, userID, extra, botType, botBody, msgTS, msgType, msgBody, answerID)
+	  }`, userID, extra, msgTS, msgType, msgBody, answerID)
+
+	if botType != "" {
+		input = strings.Replace(input, `"bot": {}`, fmt.Sprintf(`"bot": {"%s": %s}`, botType, botBody), -1)
+	}
 
 	respBytes, err := x.HTTPClient.Request("POST", url, []byte(input), 1)
 	if err != nil {

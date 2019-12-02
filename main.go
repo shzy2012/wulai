@@ -28,6 +28,10 @@ func main() {
 	shell.AddCmd(cmd.MsgBotResponse)
 	shell.AddCmd(cmd.MsgBotResponseTask)
 
+	//nlp类
+	shell.AddCmd(cmd.NlpEntitiesExtract)
+	shell.AddCmd(cmd.NlpTokenize)
+
 	// start shell
 	shell.Run()
 }
