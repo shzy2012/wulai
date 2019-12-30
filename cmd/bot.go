@@ -55,6 +55,52 @@ func msgBotResponseTask(userID, content string) string {
 	return fmt.Sprintf("%s\n", bytes)
 }
 
+//msgBotResponseKeyword 获取关键字机器人回复
+func msgBotResponseKeyword(userID, content string) string {
+
+	//消息类型[文本消息]
+	textMsg := &wulai.Text{
+		Content: content,
+	}
+
+	botResp, err := WulaiClient.MsgBotResponseKeyword(userID, textMsg, "")
+	if err != nil {
+		if cliErr, ok := err.(*errors.ClientError); ok {
+			return cliErr.Message()
+		} else if serErr, ok := err.(*errors.ServerError); ok {
+			return serErr.Message()
+		} else {
+			return err.Error()
+		}
+	}
+
+	bytes, _ := json.Marshal(botResp)
+	return fmt.Sprintf("%s\n", bytes)
+}
+
+//msgBotResponseQa 获取问答机器人回复
+func msgBotResponseQa(userID, content string) string {
+
+	//消息类型[文本消息]
+	textMsg := &wulai.Text{
+		Content: content,
+	}
+
+	botResp, err := WulaiClient.MsgBotResponseQa(userID, textMsg, "")
+	if err != nil {
+		if cliErr, ok := err.(*errors.ClientError); ok {
+			return cliErr.Message()
+		} else if serErr, ok := err.(*errors.ServerError); ok {
+			return serErr.Message()
+		} else {
+			return err.Error()
+		}
+	}
+
+	bytes, _ := json.Marshal(botResp)
+	return fmt.Sprintf("%s\n", bytes)
+}
+
 /****************
  bot cmd
 ****************/
@@ -85,6 +131,36 @@ var MsgBotResponseTask = &ishell.Cmd{
 			userID := c.Args[0]
 			context := c.Args[1]
 			fmt.Println("操作结果:", msgBotResponseTask(userID, context))
+		})
+	},
+}
+
+//MsgBotResponseKeyword 获取关键字机器人回复
+var MsgBotResponseKeyword = &ishell.Cmd{
+	Name:     "msgBotResponseKeyword",
+	Aliases:  []string{"msgBotResponseKeyword", "msg_bot_response_keyword", "mbrk"},
+	Help:     "获取关键字机器人回复",
+	LongHelp: "获取关键字机器人回复 msgBotResponseKeyword userID context\n\n\n\n参数 userID:用户ID context:问题",
+	Func: func(c *ishell.Context) {
+		frontFunc(c, 2, func() {
+			userID := c.Args[0]
+			context := c.Args[1]
+			fmt.Println("操作结果:", msgBotResponseKeyword(userID, context))
+		})
+	},
+}
+
+//MsgBotResponseQa 获取关键字机器人回复
+var MsgBotResponseQa = &ishell.Cmd{
+	Name:     "msgBotResponseQa",
+	Aliases:  []string{"msgBotResponseQa", "msg_bot_response_qa", "mbrq"},
+	Help:     "获取问答机器人回复",
+	LongHelp: "获取问答机器人回复 msgBotResponseKeyword userID context\n\n\n\n参数 userID:用户ID context:问题",
+	Func: func(c *ishell.Context) {
+		frontFunc(c, 2, func() {
+			userID := c.Args[0]
+			context := c.Args[1]
+			fmt.Println("操作结果:", msgBotResponseQa(userID, context))
 		})
 	},
 }

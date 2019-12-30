@@ -40,7 +40,7 @@ func userAttributeCreate(userID, attrID, attrValue string) string {
 //userAttributeList 获取用户属性列表
 func userAttributeList(isAttrGroup bool, page, pageSize int) string {
 
-	resp, err := WulaiClient.UserAttributeList(isAttrGroup, page, pageSize)
+	resp, err := WulaiClient.UserAttributeList(nil, page, pageSize)
 	if err != nil {
 		if cliErr, ok := err.(*errors.ClientError); ok {
 			return cliErr.Message()

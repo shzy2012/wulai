@@ -27,6 +27,8 @@ func main() {
 	//bot类
 	shell.AddCmd(cmd.MsgBotResponse)
 	shell.AddCmd(cmd.MsgBotResponseTask)
+	shell.AddCmd(cmd.MsgBotResponseKeyword)
+	shell.AddCmd(cmd.MsgBotResponseQa)
 
 	//nlp类
 	shell.AddCmd(cmd.NlpEntitiesExtract)

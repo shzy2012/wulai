@@ -9,7 +9,7 @@ require (
 	github.com/chzyer/test v0.0.0-20180213035817-a1ea475d72b1 // indirect
 	github.com/fatih/color v1.7.0
 	github.com/flynn-archive/go-shlex v0.0.0-20150515145356-3f9db97f8568 // indirect
-	github.com/laiye-ai/wulai-openapi-sdk-golang v0.0.0-20191202060229-f671df8f2c4f
+	github.com/laiye-ai/wulai-openapi-sdk-golang v0.0.0-20191224070549-4af32fd2b7ef
 	github.com/mattn/go-colorable v0.1.4 // indirect
 	github.com/mattn/go-isatty v0.0.10 // indirect
 	github.com/stretchr/testify v1.4.0 // indirect

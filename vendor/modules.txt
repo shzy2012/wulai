@@ -6,7 +6,7 @@ github.com/abiosoft/readline
 github.com/fatih/color
 # github.com/flynn-archive/go-shlex v0.0.0-20150515145356-3f9db97f8568
 github.com/flynn-archive/go-shlex
-# github.com/laiye-ai/wulai-openapi-sdk-golang v0.0.0-20191202060229-f671df8f2c4f
+# github.com/laiye-ai/wulai-openapi-sdk-golang v0.0.0-20191224070549-4af32fd2b7ef
 github.com/laiye-ai/wulai-openapi-sdk-golang/services/common
 github.com/laiye-ai/wulai-openapi-sdk-golang/services/common/errors
 github.com/laiye-ai/wulai-openapi-sdk-golang/services/common/log
